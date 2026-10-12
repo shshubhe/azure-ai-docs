@@ -18,6 +18,7 @@ ms.custom:
   - build-2024
   - ignite-2024
   - sfi-image-nochange
+ai-usage: ai-assisted
 ---
 
 # Workspace managed virtual network isolation
@@ -88,6 +89,8 @@ If you add the following services to the virtual network by using either a servi
 | __Azure Key Vault__| [Service endpoint](/azure/key-vault/general/overview-vnet-service-endpoints)</br>[Private endpoint](/azure/key-vault/general/private-link-service) | [Allow trusted Microsoft services to bypass this firewall](how-to-secure-workspace-vnet.md#secure-azure-key-vault) |
 | __Azure Storage Account__ | [Service and private endpoint](how-to-secure-workspace-vnet.md?tabs=se#secure-azure-storage-accounts)</br>[Private endpoint](how-to-secure-workspace-vnet.md?tabs=pe#secure-azure-storage-accounts) | [Grant access from Azure resource instances](/azure/storage/common/storage-network-security#grant-access-from-azure-resource-instances)</br>__or__</br>[Grant access to trusted Azure services](/azure/storage/common/storage-network-security#grant-access-to-trusted-azure-services) |
 | __Azure Container Registry__ | [Private endpoint](/azure/container-registry/container-registry-private-link) | [Allow trusted services](/azure/container-registry/allow-access-trusted-services) |
+
+[!INCLUDE [machine-learning-key-vault-trusted-services](includes/machine-learning-key-vault-trusted-services.md)]
 
 ## Prerequisites
 

@@ -111,6 +111,8 @@ Azure Machine Learning workspace supports enabling public network access from sp
 To secure outbound communication from a deployment to services, you need to enable managed virtual network isolation for your Azure Machine Learning workspace so that Azure Machine Learning can create a managed virtual network for the workspace.
 All managed online endpoints in the workspace (and managed compute resources for the workspace, such as compute clusters and compute instances) automatically use this workspace managed virtual network, and the deployments under the endpoints share the managed virtual network's private endpoints for communication with the workspace's resources.
 
+[!INCLUDE [machine-learning-key-vault-trusted-services](includes/machine-learning-key-vault-trusted-services.md)]
+
 When you secure your workspace with a managed virtual network, the `egress_public_access` flag for managed online deployments no longer applies. Avoid setting this flag when creating the managed online deployment.
 
 For outbound communication with a workspace managed virtual network, Azure Machine Learning:

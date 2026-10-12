@@ -13,6 +13,7 @@ ms.topic: how-to
 ms.custom: references_regions, security, build-2023, FY25Q1-Linter
 monikerRange: 'azureml-api-2 || azureml-api-1'
 # Customer Intent: As an admin, I wante to understand how to secure my Azure Machine Learning workspace and associated resources.
+ai-usage: ai-assisted
 ---
 
 # Secure Azure Machine Learning workspace resources by using virtual networks (VNets)
@@ -134,6 +135,8 @@ To access the workspace over the public internet while keeping all the associate
     | __Azure Container Registry__ | [Private endpoint](/azure/container-registry/container-registry-private-link) | [Allow trusted services](/azure/container-registry/allow-access-trusted-services) |
     :::moniker-end
 
+    For the Azure Key Vault trusted-services bypass requirement and its rationale, see [Secure the workspace and associated resources](#secure-the-workspace-and-associated-resources).
+
 1. In properties for the Azure Storage Account for your workspace, add your client IP address to the allowed list in firewall settings. For more information, see [Configure firewalls and virtual networks](/azure/storage/common/storage-network-security#configuring-access-from-on-premises-networks).
 
 ## Secure the workspace and associated resources
@@ -149,6 +152,9 @@ Use the following steps to secure your workspace and associated resources. These
     | __Azure Key Vault__| [Service endpoint](/azure/key-vault/general/overview-vnet-service-endpoints)</br>[Private endpoint](/azure/key-vault/general/private-link-service) | [Allow trusted Microsoft services to bypass this firewall](how-to-secure-workspace-vnet.md#secure-azure-key-vault) |
     | __Azure Storage Account__ | [Service and private endpoint](how-to-secure-workspace-vnet.md?tabs=se#secure-azure-storage-accounts)</br>[Private endpoint](how-to-secure-workspace-vnet.md?tabs=pe#secure-azure-storage-accounts) | [Grant access from Azure resource instances](/azure/storage/common/storage-network-security#grant-access-from-azure-resource-instances)</br>__or__</br>[Grant access to trusted Azure services](/azure/storage/common/storage-network-security#grant-access-to-trusted-azure-services) |
     | __Azure Container Registry__ | [Private endpoint](/azure/container-registry/container-registry-private-link) | [Allow trusted services](/azure/container-registry/allow-access-trusted-services) |
+
+    [!INCLUDE [machine-learning-key-vault-trusted-services](includes/machine-learning-key-vault-trusted-services.md)]
+
 :::moniker-end
 :::moniker range="azureml-api-1"
 1. Create an [Azure Virtual Networks](/azure/virtual-network/virtual-networks-overview). This virtual network secures the workspace and other resources. Then create a [Private Link-enabled workspace](./v1/how-to-secure-workspace-vnet.md#secure-the-workspace-with-private-endpoint) to enable communication between your VNet and workspace.
@@ -159,6 +165,9 @@ Use the following steps to secure your workspace and associated resources. These
     | __Azure Key Vault__| [Service endpoint](/azure/key-vault/general/overview-vnet-service-endpoints)</br>[Private endpoint](/azure/key-vault/general/private-link-service) | [Allow trusted Microsoft services to bypass this firewall](./v1/how-to-secure-workspace-vnet.md#secure-azure-key-vault) |
     | __Azure Storage Account__ | [Service and private endpoint](./v1/how-to-secure-workspace-vnet.md?tabs=se#secure-azure-storage-accounts)</br>[Private endpoint](./v1/how-to-secure-workspace-vnet.md?tabs=pe#secure-azure-storage-accounts) | [Grant access from Azure resource instances](/azure/storage/common/storage-network-security#grant-access-from-azure-resource-instances)</br>__or__</br>[Grant access to trusted Azure services](/azure/storage/common/storage-network-security#grant-access-to-trusted-azure-services) |
     | __Azure Container Registry__ | [Private endpoint](/azure/container-registry/container-registry-private-link) | [Allow trusted services](/azure/container-registry/allow-access-trusted-services) |
+
+    [!INCLUDE [machine-learning-key-vault-trusted-services](includes/machine-learning-key-vault-trusted-services.md)]
+
 :::moniker-end
 
 :::image type="content" source="./media/how-to-network-security-overview/secure-workspace-resources.svg" alt-text="Diagram showing how the workspace and associated resources communicate inside a VNet.":::

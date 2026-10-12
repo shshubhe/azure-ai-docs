@@ -18,6 +18,7 @@ ms.custom:
   - engagement-fy23
   - build-2023
   - sfi-image-nochange
+ai-usage: ai-assisted
 ---
 
 # Secure an Azure Machine Learning workspace by using virtual networks
@@ -170,6 +171,8 @@ Azure Machine Learning supports storage accounts configured to use either a priv
 ---
 
 ## Secure Azure Key Vault
+
+[!INCLUDE [machine-learning-key-vault-trusted-services](includes/machine-learning-key-vault-trusted-services.md)]
 
 Azure Machine Learning uses an associated Key Vault instance to store the following credentials:
 * The associated storage account connection string

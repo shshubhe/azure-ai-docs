@@ -134,6 +134,15 @@ For example, if your workspace's managed virtual network contains two deployment
 
 To learn more about configurations for the workspace managed virtual network, see [Managed virtual network architecture](how-to-managed-network.md#managed-virtual-network-architecture).
 
+> [!IMPORTANT]
+> If the Azure Key Vault associated with your workspace has public network access disabled or firewall rules enabled, you must enable **Allow trusted Microsoft services to bypass this firewall** on the key vault. This is required even when you use private endpoints.
+>
+> **Why this is required:** The Azure Machine Learning service stores and retrieves workspace secrets in your key vault from Microsoft-managed infrastructure. Private endpoints in your virtual network (or the workspace managed virtual network) don't cover this service-side path.
+>
+> The bypass doesn't allow access from all Azure services. Only the services listed in [Trusted services](/azure/key-vault/general/overview-vnet-service-endpoints#trusted-services) can use it, and each request must still present a valid Microsoft Entra token and have Azure RBAC or access-policy permissions on the key vault.
+>
+> If the key vault is associated with a Network Security Perimeter in enforced mode, the perimeter overrides the trusted-services bypass. You must add an inbound access rule that allows Azure Machine Learning to access the key vault.
+
 ## Scenarios for network isolation configuration
 
 Your Azure Machine Learning workspace and managed online endpoint each have a `public_network_access` flag that you can use to configure their inbound communication. On the other hand, outbound communication from a deployment depends on the workspace's managed virtual network.

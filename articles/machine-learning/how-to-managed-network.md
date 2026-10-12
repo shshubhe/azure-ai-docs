@@ -89,6 +89,15 @@ If you add the following services to the virtual network by using either a servi
 | __Azure Storage Account__ | [Service and private endpoint](how-to-secure-workspace-vnet.md?tabs=se#secure-azure-storage-accounts)</br>[Private endpoint](how-to-secure-workspace-vnet.md?tabs=pe#secure-azure-storage-accounts) | [Grant access from Azure resource instances](/azure/storage/common/storage-network-security#grant-access-from-azure-resource-instances)</br>__or__</br>[Grant access to trusted Azure services](/azure/storage/common/storage-network-security#grant-access-to-trusted-azure-services) |
 | __Azure Container Registry__ | [Private endpoint](/azure/container-registry/container-registry-private-link) | [Allow trusted services](/azure/container-registry/allow-access-trusted-services) |
 
+> [!IMPORTANT]
+> If the Azure Key Vault associated with your workspace has public network access disabled or firewall rules enabled, you must enable **Allow trusted Microsoft services to bypass this firewall** on the key vault. This is required even when you use private endpoints.
+>
+> **Why this is required:** The Azure Machine Learning service stores and retrieves workspace secrets in your key vault from Microsoft-managed infrastructure. Private endpoints in your virtual network (or the workspace managed virtual network) don't cover this service-side path.
+>
+> The bypass doesn't allow access from all Azure services. Only the services listed in [Trusted services](/azure/key-vault/general/overview-vnet-service-endpoints#trusted-services) can use it, and each request must still present a valid Microsoft Entra token and have Azure RBAC or access-policy permissions on the key vault.
+>
+> If the key vault is associated with a Network Security Perimeter in enforced mode, the perimeter overrides the trusted-services bypass. You must add an inbound access rule that allows Azure Machine Learning to access the key vault.
+
 ## Prerequisites
 
 Before following the steps in this article, make sure you have the following prerequisites:
